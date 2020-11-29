@@ -5,16 +5,30 @@ namespace App\Http\Responses\User;
 trait UserResponse
 {
     /**
-     * User was created with token response type.
-     *
-     * @return void
-     */
-    protected function userCreatedWithTokenResponse($code, string $token)
+      * User token was created response type.
+      *
+      * @param string $token
+      *
+      * @return Response
+    */
+    public static function userTokenCreatedResponse(string $token)
     {
         return response()->json([
-            'code' => $code ?? 200,
+            'code' => 201,
             'token' => $token,
             'token_type' => 'Bearer',
         ]);
+    }
+
+    /**
+     * User created response.
+     *
+     * @param User $user
+     *
+     * @return UserResource
+     */
+    public static function userCreatedResponse(User $user)
+    {
+        return new UserResource($user);
     }
 }
