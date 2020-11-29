@@ -7,8 +7,8 @@ use App\Jobs\User\CreateUser;
 use App\Services\User\UserService;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Responses\User\UserResponse;
-use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\User\UserLoginRequest;
+use App\Http\Requests\User\UserRegisterRequest;
 
 final class AuthController extends Controller
 {
