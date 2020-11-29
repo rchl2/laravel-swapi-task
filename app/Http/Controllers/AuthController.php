@@ -15,6 +15,18 @@ final class AuthController extends Controller
     use UserService, UserResponse;
     
     /**
+     * Authorized user.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return Response
+     */
+    public function authorized(Request $request)
+    {
+        return $this->userAuthorizedResponse($request->user());
+    }
+
+    /**
      * Register user.
      *
      * @param \App\Http\Requests\UserRegisterRequest $request

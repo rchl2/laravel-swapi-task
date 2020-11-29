@@ -31,4 +31,16 @@ trait UserResponse
     {
         return new UserResource($user);
     }
+
+    /**
+     * User authorized response.
+     *
+     * @param User $user
+     *
+     * @return UserResource
+     */
+    public function userAuthorizedResponse(User $user)
+    {
+        return new UserResource($user);
+    }
 }
