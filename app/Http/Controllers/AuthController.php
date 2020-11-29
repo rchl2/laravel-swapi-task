@@ -52,7 +52,7 @@ final class AuthController extends Controller
     public function login(UserLoginRequest $request)
     {
         // Get credentials from request.
-        $credentials = ['email' => $request->email(), 'password' => $request->password()];
+        $credentials = ['email' => $request->email, 'password' => $request->password];
         
         // Atempt login.
         if (! Auth::attempt($credentials)) {

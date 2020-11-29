@@ -15,6 +15,6 @@ trait UserService
      */
     protected function createTokenForUser(User $user)
     {
-        return $user ?? $user->createToken('authToken')->plainTextToken;
+        return $user->createToken('authToken')->plainTextToken;
     }
 }

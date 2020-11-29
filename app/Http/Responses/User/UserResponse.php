@@ -8,13 +8,13 @@ use App\Http\Resources\UserResource;
 trait UserResponse
 {
     /**
-      * User token was created response type.
+      * User success authorization response type with token.
       *
       * @param string $token
       *
       * @return Response
     */
-    public static function userTokenCreatedResponse(string $token)
+    public static function sendSuccessAuthorizationResponse(string $token)
     {
         return response()->json([
             'code' => 201,
