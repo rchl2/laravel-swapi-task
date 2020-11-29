@@ -2,6 +2,9 @@
 
 namespace App\Http\Responses\User;
 
+use App\Models\User;
+use App\Http\Resources\UserResource;
+
 trait UserResponse
 {
     /**

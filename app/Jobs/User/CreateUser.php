@@ -22,8 +22,8 @@ final class CreateUser
     public function handle()
     {
         return User::create([
-            'email' => $requestData['email'],
-            'password' => Hash::make($requestData['password']),
+            'email' => $this->requestData['email'],
+            'password' => Hash::make($this->requestData['password']),
         ]);
     }
 }
