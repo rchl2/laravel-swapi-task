@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Services\SWAPI;
+namespace App\Services\API;
 
-trait GuzzleService
+use GuzzleHttp\Client as Client;
+
+trait GuzzleClient
 {
     /**
      * Send GET request.
      *
      * @param string $route
-     * @param array $headers
      *
      * @return object|null
      */
-    protected function get(string $route, array $headers): ?object
+    protected function get(string $route): ?object
     {
         $client = $this->buildClient();
 
