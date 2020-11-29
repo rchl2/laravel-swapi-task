@@ -24,6 +24,7 @@ final class CreateUser
         return User::create([
             'email' => $this->requestData['email'],
             'password' => Hash::make($this->requestData['password']),
+            'hero_id' => rand(1, 82),
         ]);
     }
 }
