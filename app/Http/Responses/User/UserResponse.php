@@ -8,7 +8,7 @@ use App\Http\Resources\UserResource;
 trait UserResponse
 {
     /**
-      * User success authorization response type with token.
+      * User success authorization response with token.
       *
       * @param string $token
       *
@@ -45,5 +45,15 @@ trait UserResponse
     public function userAuthorizedResponse(User $user)
     {
         return new UserResource($user);
+    }
+
+    /**
+     * User e-mail updated response.
+     *
+     * @return Response
+     */
+    public function userEmailUpdatedResponse()
+    {
+        return response()->json(['message' => 'Email was updated'], 200);
     }
 }

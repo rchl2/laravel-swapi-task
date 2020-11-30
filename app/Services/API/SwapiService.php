@@ -56,14 +56,15 @@ trait SwapiService
     }
 
     /**
-     * Get hero specific resource.
-     *
-     * @param string $resourceName
-     * @param integer $heroId
-     *
-     * @return mixed
-     */
-    protected function getHeroSpecificResource(string $resourceName, int $heroId)
+      * Get hero specific resource in list or single type.
+      *
+      * @param string $resourceName
+      * @param integer $heroId
+      * @param integer $resourceId
+      *
+      * @return void
+      */
+    protected function getHeroSpecificResource(string $resourceName, int $heroId, int $resourceId = null)
     {
         // Check if resource is in array of allowed.
         if (! in_array($resourceName, $this->allowedResources())) {
@@ -76,13 +77,18 @@ trait SwapiService
         // Put resource collection into collection.
         $collection = collect($hero[$resourceName] ?? null);
 
-        // Collector for resource items.
+        // Collector.
         $collector = [];
 
         // Use basename to get IDs from URls of resource item.
-        if($collection->count()) {
+        if ($collection->count()) {
             foreach ($collection as $item) {
                 $itemId = basename($item);
+
+                // Check if we have single resource ID.
+                if ($itemId == $resourceId) {
+                    return $this->getSpecificResource($resourceName, $itemId);
+                }
     
                 // Get specific resource based on gathered ID.
                 $resource = $this->getSpecificResource($resourceName, $itemId);
@@ -90,7 +96,7 @@ trait SwapiService
                 // Push resources from request into collector.
                 $collector[] = $resource;
             }
-    
+            
             // Return collector.
             return $collector;
         }

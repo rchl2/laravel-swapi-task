@@ -5,7 +5,7 @@ namespace App\Http\Responses\Generic;
 trait SwapiResponse
 {
     /**
-     * Resource not allowed response type.
+     * Resource not allowed response.
      *
      * @return Response
      */
@@ -15,7 +15,7 @@ trait SwapiResponse
     }
 
     /**
-     * Send resource not found response type.
+     * Send resource not found response.
      *
      * @return Response
      */

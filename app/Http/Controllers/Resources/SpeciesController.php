@@ -12,6 +12,19 @@ final class SpeciesController extends Controller
     use SwapiService;
 
     /**
+     * Get user specific species.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function getUserSpecificSpecie(Request $request, int $id) 
+    {
+        return $this->getHeroSpecificResource('species', $request->user()->hero_id, $id);
+    }
+
+    /**
      * Get user species.
      *
      * @return mixed

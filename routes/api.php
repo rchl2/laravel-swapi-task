@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Resources\FilmController;
 use App\Http\Controllers\Resources\PlanetController;
 use App\Http\Controllers\Resources\SpeciesController;
@@ -28,10 +29,26 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/', [AuthController::class, 'authorized']);
 
-    // Resource controllers.
+    // Update e-mail.
+    Route::post('/update-email', [UserController::class, 'updateEmail']);
+
+    // Films.
+    Route::get('/films/{id}', [FilmController::class, 'getUserSpecificFilm']);
     Route::get('/films', [FilmController::class, 'getUserFilms']);
+
+    // Species.
+    Route::get('/species/{id}', [SpeciesController::class, 'getUserSpecificSpecie']);
     Route::get('/species', [SpeciesController::class, 'getUserSpecies']);
+
+    // Vehicles.
+    Route::get('/vehicles/{id}', [VehicleController::class, 'getUserSpecificVehicle']);
     Route::get('/vehicles', [VehicleController::class, 'getUserVehicles']);
+
+    // Starships.
+    Route::get('/starships/{id}', [StarshipController::class, 'getUserSpecificStarship']);
     Route::get('/starships', [StarshipController::class, 'getUserStarships']);
+
+    // Planets.
+    Route::get('/planets/{id}', [PlanetController::class, 'getUserSpecificPlanet']);
     Route::get('/planets', [PlanetController::class, 'getUserPlanets']);
 });

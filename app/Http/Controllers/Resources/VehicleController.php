@@ -12,6 +12,19 @@ final class VehicleController extends Controller
     use SwapiService;
 
     /**
+     * Get user specific vehicles.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function getUserSpecificVehicle(Request $request, int $id) 
+    {
+        return $this->getHeroSpecificResource('vehicles', $request->user()->hero_id, $id);
+    }
+
+    /**
      * Get user vehicles.
      *
      * @return mixed
