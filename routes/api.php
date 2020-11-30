@@ -3,7 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Resources\ResourceController;
+use App\Http\Controllers\Resources\FilmController;
+use App\Http\Controllers\Resources\PlanetController;
+use App\Http\Controllers\Resources\SpeciesController;
+use App\Http\Controllers\Resources\VehicleController;
+use App\Http\Controllers\Resources\StarshipController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +29,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/', [AuthController::class, 'authorized']);
 
     // Resource controllers.
-    Route::get('/films', [ResourceController::class, 'getUserFilms']);
-    Route::get('/species', [ResourceController::class, 'getUserSpecies']);
-    Route::get('/vehicles', [ResourceController::class, 'getUserVehicles']);
-    Route::get('/starships', [ResourceController::class, 'getUserStarships']);
-    Route::get('/planets', [ResourceController::class, 'getUserPlanets']);
+    Route::get('/films', [FilmController::class, 'getUserFilms']);
+    Route::get('/species', [SpeciesController::class, 'getUserSpecies']);
+    Route::get('/vehicles', [VehicleController::class, 'getUserVehicles']);
+    Route::get('/starships', [StarshipController::class, 'getUserStarships']);
+    Route::get('/planets', [PlanetController::class, 'getUserPlanets']);
 });
