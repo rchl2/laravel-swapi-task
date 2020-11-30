@@ -4,14 +4,16 @@ namespace App\Services\API;
 
 use Carbon\Carbon;
 use App\Services\API\GuzzleClient;
+use App\Services\API\SwapiService;
 use Illuminate\Support\Collection;
 use App\Services\Cache\CacheService;
 use Illuminate\Support\Facades\Cache;
+use App\Http\Responses\Generic\SwapiResponse;
 use App\Tools\Support\FormatDataFromResponse;
 
 trait SwapiService
 {
-    use GuzzleClient, CacheService, FormatDataFromResponse;
+    use GuzzleClient, CacheService, SwapiResponse, FormatDataFromResponse;
 
     /**
      * Get random hero.
@@ -29,10 +31,15 @@ trait SwapiService
      * @param string $resourceName
      * @param integer $id
      *
-     * @return array
+     * @return mixed
      */
-    protected function getSpecificResource(string $resourceName, int $id): array
+    protected function getSpecificResource(string $resourceName, int $id)
     {
+        // Check if resource is in array of allowed.
+        if (! in_array($resourceName, $this->allowedResources())) {
+            return $this->sendResourceNotAllowedResponse();
+        }
+
         // Check for data in storage.
         if (Cache::has($resourceName .  '_' . $id)) {
             return Cache::get($resourceName . '_' . $id);
@@ -54,10 +61,15 @@ trait SwapiService
      * @param string $resourceName
      * @param integer $heroId
      *
-     * @return array
+     * @return mixed
      */
-    protected function getHeroSpecificResource(string $resourceName, int $heroId): array
+    protected function getHeroSpecificResource(string $resourceName, int $heroId)
     {
+        // Check if resource is in array of allowed.
+        if (! in_array($resourceName, $this->allowedResources())) {
+            return $this->sendResourceNotAllowedResponse();
+        }
+        
         // Get hero.
         $hero = $this->getSpecificResource('people', $heroId);
 
@@ -80,5 +92,15 @@ trait SwapiService
 
         // Return collector.
         return $collector;
+    }
+
+    /**
+     * Get array of allowed resources.
+     *
+     * @return array
+     */
+    private function allowedResources(): array
+    {
+        return ['people', 'films', 'species', 'vehicles', 'starships', 'planets'];
     }
 }
