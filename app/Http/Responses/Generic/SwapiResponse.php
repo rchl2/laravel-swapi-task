@@ -13,4 +13,14 @@ trait SwapiResponse
     {
         return response()->json(['message' => 'This resource is not in allowed list'], 503);
     }
+
+    /**
+     * Send resource not found response type.
+     *
+     * @return Response
+     */
+    public static function sendResourceNotFoundResponse()
+    {
+        return response()->json(['message' => 'This resource was not found on SWAPI routes'], 503);
+    }
 }

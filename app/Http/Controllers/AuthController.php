@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Jobs\User\CreateUser;
 use App\Services\User\UserService;
-use App\Services\API\SwapiService;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Responses\User\UserResponse;
 use App\Http\Requests\User\UserLoginRequest;
@@ -13,7 +13,7 @@ use App\Http\Requests\User\UserRegisterRequest;
 
 final class AuthController extends Controller
 {
-    use UserService, UserResponse, SwapiService;
+    use UserService, UserResponse;
     
     /**
      * Authorized user.
@@ -24,7 +24,6 @@ final class AuthController extends Controller
      */
     public function authorized(Request $request)
     {
-        return $this->getSpecificResource('test', 6);
         return $this->userAuthorizedResponse($request->user());
     }
 

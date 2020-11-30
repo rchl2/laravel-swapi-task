@@ -74,24 +74,29 @@ trait SwapiService
         $hero = $this->getSpecificResource('people', $heroId);
 
         // Put resource collection into collection.
-        $collection = collect($hero[$resourceName]);
+        $collection = collect($hero[$resourceName] ?? null);
 
         // Collector for resource items.
         $collector = [];
 
         // Use basename to get IDs from URls of resource item.
-        foreach ($collection as $item) {
-            $itemId = basename($item);
-
-            // Get specific resource based on gathered ID.
-            $resource = $this->getSpecificResource($resourceName, $itemId);
-
-            // Push resources from request into collector.
-            $collector[] = $resource;
+        if($collection->count()) {
+            foreach ($collection as $item) {
+                $itemId = basename($item);
+    
+                // Get specific resource based on gathered ID.
+                $resource = $this->getSpecificResource($resourceName, $itemId);
+    
+                // Push resources from request into collector.
+                $collector[] = $resource;
+            }
+    
+            // Return collector.
+            return $collector;
         }
 
-        // Return collector.
-        return $collector;
+        // Return response.
+        return $this->sendResourceNotFoundResponse();
     }
 
     /**
